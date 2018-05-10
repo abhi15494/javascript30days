@@ -1,0 +1,53 @@
+html{
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: cursive;
+    background: rgb(209, 233, 233);
+    font-weight: 200;
+}
+
+body{
+    margin: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+input{
+    margin-top: 20px;
+    width: 538px;
+    height: 36px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+ul{
+    margin: 20px 0px 0px;
+    padding: 0px;
+}
+
+ul > li{
+    list-style-type: none;
+    text-align: center;
+    border: 2px solid #555;
+    padding: 10px;
+    margin: 10px 0px;
+    background: teal;
+    color: white;
+    min-width: 490px;
+}
+
+ul > li:nth-child(odd){
+    transform: rotate(-3deg);
+}
+
+
+ul > li:nth-child(even){
+    transform: rotate(3deg);
+}

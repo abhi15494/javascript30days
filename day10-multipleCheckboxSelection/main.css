@@ -1,0 +1,55 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #BADA55;
+}
+
+.body{
+    min-height: 100vh;
+    width: 100%;
+}
+
+.flex-pc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inbox{
+    width: 500px;
+    background: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 10px 10px 28px -3px #4444;
+
+}
+
+.item{
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+input[type="checkbox"]{
+
+}
+
+.item p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 20px;
+    color: #444;
+    text-decoration: none;
+    transition: .05s all linear;
+}
+
+
+.item p.active{
+    color: #bbb;
+    text-decoration: line-through;
+}
