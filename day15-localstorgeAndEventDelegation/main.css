@@ -1,0 +1,40 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #BADA55;
+}
+
+.body{
+    min-height: 100vh;
+    width: 100%;
+}
+
+.flex-pc{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper{
+  background-color: white;
+  padding: 20px 30px;
+  min-height: 252px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrapper div{
+  flex: 0 0 100%;
+}
+
+.wrapper ul > li{
+  list-style-type: none;
+}
+
+form{
+  flex: 0 0 100%;
+  align-self: flex-end;
+}
