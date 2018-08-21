@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+    <style>
+        :root{
+            --primary-color: #111111;
+            --secondary-color: #111111;
+            --tertirary-color: #111111;
+            --quaternary-color: #111111;
+            --quinary-color: #111111;
+        }
+        body{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            box-sizing: border-box;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+        }
+        .options{
+            width: 80%;
+            box-shadow: 0px 0px 30px 0px #999999;
+            margin: 100px auto;
+            min-height: 500px;
+            color: #444444;
+        }
+
+        .options .steps-sp{
+            display: flex;
+            flex-wrap: wrap;
+            counter-reset: count-step;
+        }
+        .options .steps-sp > div{
+            flex: 0 0 calc( 100% - 60px );
+            padding: 30px;
+            position: relative;
+        }
+        .options .steps-sp > div:not(:last-child)::after{
+            display: none;
+        }
+
+        .options .steps-sp > div::before{
+            counter-increment: count-step;
+            content: counter(count-step);
+            display: block;
+            text-align: center;
+            border-bottom: 3px solid #ffbc00;
+            font-size: 3rem;
+            margin: 5px auto;
+            padding-bottom: 10px;
+            font-weight: 400;
+            width: 110px;
+            color: #435674;
+        }
+        .options .steps-sp > div:not(:last-child) {
+            border-right: 2px solid transparent;
+        }
+        .options .steps-sp > div h3{
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #435674;
+        }
+
+        .options .steps-sp ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .options .steps-sp ul li{
+            text-align: left;
+            margin: 5px;
+            padding: 0px 10px 18px;
+            position: relative;
+             border-bottom: 1px solid #b6b6b6;
+        }
+        .options .steps-sp ul li:not(:last-child):after{
+            content: "";
+            display: block;
+            background: white;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            bottom: -11px;
+            right: 4px;
+            border-right: 1px solid #b6b6b6;
+            border-top: 1px solid #b6b6b6;
+            transform: rotate(135deg);
+        }
+
+        .options .steps-sp ul li a{
+            text-decoration: none;
+            color: #444444;
+            margin:  5px 0px;
+            cursor: pointer;
+        }
+        .options .steps-sp ul li a i.fa-li{
+            color: #ffbc00;
+        }
+        .options .steps-sp ul li.active a i{
+            color: #12b612;
+        }
+
+        .options .sharelink{
+            border-top: 1px solid #aaa;
+        }
+        .options .sharelink > p{
+            padding: 30px 40px;
+            font-size: 1.2rem;
+        }
+        .options .sharelink ul.links{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+        .options .sharelink ul.links li{
+            padding: 15px 25px 20px;
+            flex: 0 0 calc(33% - 47px);
+            border-top: 1px solid #aaa;
+        }
+        .options .sharelink ul.links li:not(:last-child){
+            border-right: 1px solid #aaa;
+        }
+        .options .sharelink ul.links strong{
+            font-weight: 700;
+        }
+        .options .sharelink ul.links p{
+            margin-bottom: 10px; 
+        }
+        .options .sharelink ul.links a{
+            display: block;    
+            padding: 2px 10px 4px;
+            cursor: copy;
+        }
+        .options .sharelink ul.links a i{    
+            background-color: #126fb6;
+            color: white;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        @media only screen and ( min-width: 1020px ){
+            .options .steps-sp > div{
+                flex: 0 0 calc( 33% - 60px );
+            }
+
+            .options .steps-sp > div:not(:last-child){
+                border-right: 2px solid #435674;
+            }
+
+            .options .steps-sp > div:not(:last-child)::after {
+                content: "";
+                display: block;
+                background: white;
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                top: 91px;
+                right: -22px;
+                border-right: 2px solid ;
+                border-top: 2px solid ;
+                transform: rotate(45deg);
+                border-right: 2px solid #435674;
+                border-top: 2px solid #435674;
+            }
+        } 
+
+        #snackbar {
+            visibility: hidden;
+            min-width: 200px;
+            margin-left: -100px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="options">
+        <div class="steps-sp">
+            <div>
+                <h3>Student</h3>
+                <ul class="steps-sp fa-ul">
+                    <li class="active"><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Segment</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Sector</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Course</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Course Topic</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Student</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Bulk Upload</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Trainer</h3>
+                <ul class="steps-sp fa-ul">
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create GL Group</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create GL Sub Group</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Create Sector</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Course</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Trainer</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Employer</h3>
+                <ul class="steps-sp fa-ul">
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create State</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create District</a></li>
+                    <li><a href="#"><i class="fa-li fa fa-clock-o" aria-hidden="true"><!-- --></i>Create Employer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="sharelink">
+            <p>Please click to copy and share the links to your organization users</p>
+            <ul class="links fa-ul">
+                <li>
+                    <p>
+                        Share for <strong>Student</strong> - 
+                    </p>
+                    <a>
+                        <i class="fa fa-fw fa-link" aria-hidden="true"></i> 
+                        Link
+                        <span class="sr-only">
+                            www.link1.com
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <p>
+                        Share for <strong>Trainer</strong> - 
+                    </p>
+                    <a>
+                        <i class="fa fa-fw fa-link" aria-hidden="true"></i> 
+                        Link
+                        <span class="sr-only">
+                            www.link2.com
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <p>
+                        Share for <strong>Employer</strong> - 
+                    </p>
+                    <a>
+                        <i class="fa fa-fw fa-link" aria-hidden="true"></i> 
+                        Link
+                        <span class="sr-only">
+                            www.link3.com
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div id="snackbar">Link Copied!</div>
+        </div>
+    </div>
+    <script>
+        const $fa = document.querySelectorAll(".steps-sp .fa-ul li");
+        [...$fa].forEach((element)=>{
+            if(element.classList.contains("active")){
+                element.querySelector("i").classList.remove("fa-clock-o");
+                element.querySelector("i").classList.add("fa-check-circle-o");
+            }
+        });
+
+        const links = document.querySelectorAll(".options .sharelink .links li a");
+        const x = document.getElementById("snackbar");
+        [...links].forEach(element => {
+            element.addEventListener("click", function(e){
+                document.execCommand("copy");
+                const copytext = e.target.innerText;
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            });
+            element.addEventListener("copy", function(event) {
+                event.preventDefault();
+                if (event.clipboardData) {
+                    console.log(element.textContent);
+                    event.clipboardData.setData("text/plain", element.textContent.replace("Link", ""));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
