@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.js"
+        integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+    <h2>Hello World</h2>
+    <script>
+        window.onload = function(){
+            // // Initializing generator
+            // function* gen(){
+            //     var i = yield 1;
+            //     yield console.log("2");
+            //     yield console.log("3");
+            //     yield i = 10;
+            //     console.log("i =",i);
+
+            //     return 'allDone';
+            // }
+
+            // var myGen = gen();
+            // // return {value: 1, done: false}
+            // console.log(myGen.next());
+            // console.log(myGen.next());
+            // console.log(myGen.next());
+            // console.log(myGen.next());
+            // console.log(myGen.next());
+            
+            genWrapper(
+            function* generator(){
+                var data1 = yield $.getJSON("https://jsonplaceholder.typicode.com/posts/1");
+                console.log(data1);
+
+                var data2 = yield $.getJSON("https://jsonplaceholder.typicode.com/posts/2");
+                console.log(data2);
+
+                var data3 = yield $.getJSON("https://jsonplaceholder.typicode.com/posts/3");
+                console.log(data3);
+
+            });
+
+            function genWrapper(generator){
+                var gen = generator();
+                function handle(yielded){
+                    if (!yielded.done){
+                        yielded.value.then(function(data){
+                            return handle(gen.next(data));
+                        })
+                    }
+                }
+                return handle(gen.next());
+            }
+            
+        }
+    </script>
+</body>
+</html>
