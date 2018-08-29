@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Object Oriented JavaScript</title>
+        <style>
+            h1{ 
+                text-align: center; 
+                color: #444; 
+                font-family: 'Trebuchet MS';
+                margin: 60px auto; 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Object Oriented JavaScript</h1>
+        <script>
+            // Classes work on the prototype model and behind the scene its same as classes
+
+            // var user = {
+            //     email: "admin@mail.com",
+            //     name: "admin",
+            //     login(){
+            //         // Here this is local reference
+            //         console.log(this.email);
+            //     },
+            //     logout(){
+            //         console.log(this.email+" -> logout")
+            //     }
+            // }
+
+            // Start with uppercase letter
+            class User{
+                constructor(name, email){
+                    this.name = name;
+                    this.email = email;
+                    this.score = 0;
+                }
+
+                getdata(){
+                    console.log(this['name']);
+                    return this;
+                }
+
+                login(){
+                    console.log(this['email'], " just logged in");
+                    return this;
+                }
+
+                logout(){
+                    console.log(this['email'], " just logged out");
+                    return this;
+                }
+
+                updateScore(){
+                    this.score+=1;
+                    console.log(this.email, 'scored = ', this.score);
+                    return this;
+                }
+            }
+
+            // We want User class functionality and add new functionality in admin so beside to copy all code what we do is use inheritance
+            class Admin extends User{
+                // console.log(this.user, "deleted");
+                // return this;
+                
+                deleteUser(user){
+                    users = users.filter(u=>{
+                        return u.email != user.email
+                    });
+                }
+            }
+
+
+            var user1 = new User('ryu', 'ryu@example.com');
+            var user2 = new User('ron', 'ron@example.com');
+            var admin = new Admin();
+            user1.getdata().login().logout().updateScore();
+            var users = [user1, user2];
+            console.log(users);
+            admin.deleteUser(user1);
+            console.log(users);
+            admin.deleteUser(user2);
+            console.log(users);
+            // The new keyword
+            // Creates a new empty object{}
+            // set value of 'this' to be the new empty object
+            // calls the constructor method
+
+        </script>
+    </body>
+</html>

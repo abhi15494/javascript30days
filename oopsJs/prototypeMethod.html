@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Object Oriented JavaScript</title>
+        <style>
+            h1{ 
+                text-align: center; 
+                color: #444; 
+                font-family: 'Trebuchet MS';
+                margin: 60px auto; 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Object Oriented JavaScript</h1>
+        <script>
+            // Class are pretend to be a class but originally its a JavaScript Prototype Model
+
+            // It is the type of constructor of class
+            function User(name, email){
+                this.name = name;
+                this.email = email;
+                this.online = false;
+                
+                // This is fine but if we want to attach the methods to the emulated class we don't add them to constructor
+                // This is persent inside the object directly not inside the __proto__ 
+                // Here login is repeated with every instance but __proto__ methods are not repeated
+                // So for the sake of memory management we use prototype property
+                // this.login = function(){
+                //     this.online = false;
+                //     console.log(this.email, "logged in");
+                // }
+            }
+            
+            User.prototype.login = function(){
+                this.online = true;
+                console.log(this.email, "logged in");
+            }
+
+            User.prototype.logout = function(){
+                this.online = false;
+                console.log(this.email, "logged out");
+            }
+
+            // To inherit prototypes of User in Admin
+
+            function Admin(...args){
+                // Take this function and run here and achieve the functionality of inheritance
+                // User.apply(this, [name, email]);                
+                this.role = 'super Admin';
+                User.apply(this, args);
+            }
+            
+            // Normally we inherit the properties of the User in Admin but we have not inherit those funtions
+            // Object.create() is a way to create object in JavaScript
+            Admin.prototype = Object.create(User.prototype);
+
+
+            Admin.prototype.getRole = function(){
+                console.log(this.role);
+            }
+
+            Admin.prototype.deleteUser = function(user){
+                users = users.filter(u=>{
+                    return u.email != user.email
+                });
+            }
+
+
+            var user1 = new User('ryu', 'ryu@example.com');
+            var user2 = new User('ron', 'ron@example.com');
+            var admin = new Admin('admin_g', 'admin@mail.com');
+            
+            var users = [user1, user2, admin];
+            
+            console.log(users);
+            admin.deleteUser(admin);
+            console.log(users);
+            admin.deleteUser(user2);
+            console.log(users);
+
+            // console.log(user2);
+            
+            // user1.login();
+            // user2.login();
+
+            // user1.logout();
+            // user2.logout();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Object Oriented JavaScript</title>
+        <style>
+            h1{ 
+                text-align: center; 
+                color: #444; 
+                font-family: 'Trebuchet MS';
+                margin: 60px auto; 
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Object Oriented JavaScript</h1>
+        <script>
+            // Initializing a object, Here we are doing is encapsulation and describe everything in a object
+            // Here this object is encapsule and everything inside it is its components
+            // This is object literal
+            // Every property of object is in one single place and its very good
+            var user = {
+                email: "admin@mail.com",
+                name: "admin",
+                login(){
+                    // Here this is local reference
+                    console.log(this.email);
+                },
+                logout(){
+                    console.log(this.email+" -> logout")
+                }
+            }
+            user.login();
+            user.logout();
+
+            // to access property 
+            // To get
+            console.log(user.name);
+            console.log(user["name"]);
+            // To set
+            user.name = "New Admin";
+            console.log(user.name);
+            user["name"] = "New Admin";
+            console.log(user["name"]); //This type can used to dynamic access object property
+
+
+        </script>
+    </body>
+</html>
