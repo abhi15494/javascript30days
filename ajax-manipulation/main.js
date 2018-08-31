@@ -6,7 +6,7 @@ result = "";
 count = 0;
 
 var loadData = function(){
-    var http = new XMLHttpRequest();
+    // var http = new XMLHttpRequest();
     // So this method is imported in all modern browse except the stone age browser 
     // and this allow us to send http request and get response data back form the server
 
