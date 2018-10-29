@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://example.com/dresses/green-dresses" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div {
+            width: 30rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Loading...</h2>
+    <div></div>
+    <script>
+        const URL = "https://jsonplaceholder.typicode.com/posts";
+        const $loader = document.querySelector("h2");
+        const $result = document.querySelector("div");
+
+        const whattodo = (data) => {
+            $loader.style.display = "none";
+            $result.style.display = "block";
+            $result.innerHTML = data.reduce((str, data) => str += `${data.id} ). <i>${data.title}</i> </br>`, "");
+        }
+
+        const funk = async (URL) => {
+            $loader.style.display = "block";
+            $result.style.display = "none";
+
+            mydata = await fetch(URL, { method: "GET", headers: { "myTermsHeader": "It's OK" } });
+            comData = await mydata.json();
+            whattodo(comData);
+        }
+
+        window.onload = funk(URL);
+    </script>
+</body>
+
+</html>

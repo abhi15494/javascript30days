@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bubble Sort</h1>
+    <pre id="result">
+        
+    </pre>
+    <script>
+        const result = document.getElementById('result');
+        let arr = [1231, 23, 123, 12, 31, 241, 23, 12312, 4123, 1231];
+        let resstr = '';
+
+        const sort = (a) => {
+            const len = a.length;
+            resstr += "Array Length = " + len + "</br>"
+            var count = 0;
+            for (var i = 0; i < len - 1; ++i) {
+                for (var j = 0; j < len - i - 1; j++) {
+                    ++count;
+                    resstr += `${count}).   j => a[${j}]= ${a[j]} </br>      j+1 => a[${j + 1}]= ${a[j + 1]} </br></br>`;
+                    if (a[j] > a[j + 1]) {
+                        var temp = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = temp;
+                        resstr += `</br> ----------------------------------------------------------------------------------</br><b>|  swapped</b> = ${a[j]} <---------> ${a[j + 1]} --> then. j => a[${j}]= ${a[j]}  j+1 => a[${j + 1}]= ${a[j + 1]}</br> ----------------------------------------------------------------------------------</br></br>`;
+                    }
+                }
+            }
+        };
+
+        resstr += "Before sorting array = " + arr + "</br>";
+        sort(arr);
+        resstr += `</br> After sorting array = ${arr}`;
+        result.innerHTML = resstr;
+    </script>
+</body>
+
+</html>
