@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="text-center">
+        <h1 class="display-1">Hello World</h1>
+        <code>Open console</code>
+        <ul class="list-group">
+            <li id="result"></li>
+        </ul>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>
+
+    <script>
+        const URL = "https://jsonplaceholder.typicode.com/posts";
+        const result = document.querySelector("#result");
+        
+        window.onload = function(){
+            console.log("I am first log")
+            console.log("I am second log")
+            // callback(URL);
+            promise(URL + "/1");
+            console.log("I am third log")
+            console.log("I am forth log")
+            console.log("I am fifth log")
+        }
+        
+        function callback(link){
+            console.log("before running callback");
+            const http = new XMLHttpRequest();
+            http.onreadystatechange = function(){
+                console.log(http)
+                if(http.readyState == 4){
+                    if(http.status == 200) {
+                        handledata(JSON.parse(http.response));
+                        console.log("completed")
+                    } else {
+                        handleerror();
+                        setTimeout( () => window.location.reload(), 5000 );
+                    }
+                } 
+            }
+            http.open("GET", link, true);
+            http.send();
+            console.log("After running callback");
+        }
+        
+        function promise(link){
+            console.log("before running promise");
+            return new Promise(function(resolve, reject){
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    success: data => resolve(data),
+                    error: error => reject(error)
+                })
+            }).then( data => handledata(data) ).catch(error => console.error(error));
+            console.log("After running promise");
+        }
+
+        // function generator(){
+        //     function*(){
+        //         yield callback(URL+"/1");
+        //         yield callback(URL+"/2");
+        //         yield callback(URL+"/3");
+        //         yield callback(URL+"/4");
+        //     }
+        // }
+
+        function handledata(data) {
+            if (data !== Array) data = [data];
+            result.innerHTML = data.reduce( (ret, data) => {
+                    return ret+`<li class="list-group-item" >${data.title}</li>`;
+                }, ""
+            ); 
+        }
+
+        function handleerror(){
+            var i = 5;
+            setInterval(()=>{
+                result.innerHTML = `
+                <h4 class="text-danger">something went wrong</h4>
+                <p>Refresh in ${i} sec</p>
+                `;
+                i-=1;
+            }, 1000);
+        }
+
+    </script>
+</body>
+
+</html>
