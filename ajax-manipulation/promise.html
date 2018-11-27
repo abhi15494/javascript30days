@@ -32,7 +32,8 @@
             console.log("I am first log")
             console.log("I am second log")
             // callback(URL);
-            promise(URL + "/1");
+            promise(URL);
+            // generators(URL);
             console.log("I am third log")
             console.log("I am forth log")
             console.log("I am fifth log")
@@ -71,17 +72,19 @@
             console.log("After running promise");
         }
 
-        // function generator(){
-        //     function*(){
-        //         yield callback(URL+"/1");
-        //         yield callback(URL+"/2");
-        //         yield callback(URL+"/3");
-        //         yield callback(URL+"/4");
-        //     }
-        // }
+        function* generator(link){
+            yield callback(link+"/1");
+            yield callback(link+"/2");
+            yield callback(link+"/3");
+            yield callback(link+"/4");
+        }
+
+        function genwrap(generator){
+
+        }
 
         function handledata(data) {
-            if (data !== Array) data = [data];
+            // if (data !== Array) data = [data]; else data = [...data];
             result.innerHTML = data.reduce( (ret, data) => {
                     return ret+`<li class="list-group-item" >${data.title}</li>`;
                 }, ""
