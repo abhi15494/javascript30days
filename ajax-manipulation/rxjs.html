@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HELLO WORLD</h1>
+    <button id="btn">Click me</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.3.0/Rx.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.3.3/rxjs.umd.min.js"></script> -->
+    <script> 
+        // const subject = new Rx.Subject();
+        const subject = new Rx.BehaviorSubject("MY data");
+        const btn = document.querySelector("#btn");
+
+        subject.subscribe(
+            data => console.log('Subject called', data)
+        );
+        // ---------------------------------------------------------------
+        // Observable
+        // ---------------------------------------------------------------
+        Rx.Observable.fromEvent(btn, 'click').throttleTime(2000)
+        // ---------------------------------------------------------------
+
+        // ---------------------------------------------------------------
+        // Observer
+        // ---------------------------------------------------------------
+        .subscribe(
+            data => console.log(data)
+        );
+        // ---------------------------------------------------------------
+
+
+        const obs = Rx.Observable.interval(1000).do(data => console.log('before take 5')).take(5).do(data => console.log('after take 5'));
+        obs.subscribe(
+            // NEXT when data is coming
+            data => subject.next(data),
+
+            // ERROR when something is wrong
+            error => console.log(error),
+
+            // COMPLETED when api returns etc
+            () => console.log('completed')
+        );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./OrgChart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div style="width:100%; height:700px;" id="orgchart"></div>    
+    <script>
+        var chart = new OrgChart(document.getElementById("orgchart"), {
+            // template: "luba",
+            nodeBinding: {
+                field_0: "name"
+            },   
+            enableDragDrop: true,  
+            nodes: [
+                { id: 1, name: "Amber McKenzie" },
+                { id: 2, pid: 1, name: "Ava Field" },
+                { id: 3, pid: 1, name: "Peter Stevens" },
+                { id: 4, pid: 1, name: "Peter Stevens" },
+                { id: 5, pid: 1, name: "Peter Stevens" },
+                { id: 6, pid: 1, name: "Peter Stevens" },
+            ]
+        });
+    </script>
+    
+</body>
+</html>

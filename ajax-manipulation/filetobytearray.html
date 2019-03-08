@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" name="myfile" id="input">
+    <div class="result"></div>
+    <script>
+        document.querySelector('input').addEventListener('change', function (e) {
+            var reader = new FileReader();
+            console.log(e.target.files[0])
+            const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+            // reader.readAsBinaryString(file);
+            // reader.readAsArrayBuffer(file);
+            // reader.readAsText(file);
+
+            reader.onload = function () {
+                binaryString = reader.result
+                // this.docCurrent = filedata;
+                
+                // var arrayBuffer = this.result,
+                //     array = new Uint8Array(arrayBuffer),
+                //     binaryString = String.fromCharCode.apply(null, array);
+                
+                document.querySelector('.result').textContent = binaryString.toString().split(',')[1];
+                console.log(binaryString);
+                
+            }
+            reader.readAsDataURL(file);
+            // reader.readAsArrayBuffer(this.files[0]);
+
+        }, false);
+    </script>
+</body>
+
+</html>

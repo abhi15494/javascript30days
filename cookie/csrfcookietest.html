@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h2>OPEN</h2>
+        <script>
+            console.log('%cHey Stop!','font-size: 3.5rem; font-weight: bold; color: red; text-shadow: 0 0 0.4rem #444;')
+            console.log('%cThis is a dangerous place, don\'t type or paste any another script here otherwise, your account may be hacked.', 'font-size: 1.5rem; color: #888888;')
+            console.log('%cFor more information, read https://www.example.com','color: #000000;')
+            const http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                console.log(http.response)
+            }
+            http.open('POST', 'http://test.mactax.online/kmorms/pub/brands/login/anonymous', true);
+            http.setRequestHeader("Content-type", "application/json");
+            http.send('');
+        </script>
+    </body>
+</html>
