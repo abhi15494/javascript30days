@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="jumbotron min-vh-100 m-0">
+        <a href="../asynccode/index.html" class="btn btn-link">Old way</a>
+        <a href="../generators/index.html" class="btn btn-link">Generators</a>
+        <a class="btn btn-link">Promise</a>
+
+        <h1 class="display-3">Promise way</h1>
+        <p class="lead">Click button to get API data</p>
+        <hr class="my-2">
+        <p class="lead">
+            <a class="btn btn-secondary" id="onOldApiCall" href="javascript:void(0)" role="button">Promise RXJS API</a>
+            <a class="btn btn-secondary" id="onOldApiCall" href="javascript:void(0)" role="button">Promise RXJS API</a>
+        </p>
+        <p>Output:</p>
+        <ol id="result"></ol>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.3/rxjs.umd.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
